@@ -1,3 +1,5 @@
+
+# 1. Terraform Block
 terraform {
   required_providers {
     aws = {
@@ -7,10 +9,18 @@ terraform {
   }
 }
 
+# 2. Provider Configuration
 provider "aws" {
-  region = "ap-south-1"
+  region = var.aws_region
 }
 
+# 3. Resource Configuration
 resource "aws_s3_bucket" "product_assets" {
-  bucket = "ecomerce-dev-product-assets-Niharika"
+  bucket = "${var.project_name}-${var.environment}-product-assets-niharika-02"
+
+  tags = {
+    Environment = var.environment
+    Purpose     = "product-assets"
+  }
+
 }
